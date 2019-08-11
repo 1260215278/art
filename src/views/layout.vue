@@ -5,55 +5,131 @@
         <p>藝通寶</p>
       </div>
       <div class="head_2">
-        <p>首页</p>
-        <p>古瓷局</p>
-        <p>藏品</p>
-        <p>活动</p>
-        <p>关于</p>
+        <p :class="Iindex==1?'acticon' : '' " @click="goto(1)">首页</p>
+        <p :class="Iindex==2?'acticon' : '' " @click="goto(2)">古瓷局</p>
+        <p :class="Iindex==3?'acticon' : '' " @click="goto(3)">藏品</p>
+        <p :class="Iindex==4?'acticon' : '' " @click="goto(4)">活动</p>
+        <p :class="Iindex==5?'acticon' : '' " @click="goto(5)">关于</p>
       </div>
-       <input type="text" />
+      <div class="head_input">
+        <input type="text" class="share" />
+        <img @click="getShare" src="@/assets/icon.png" alt />
+      </div>
     </div>
-    <router-view></router-view>
+    <div class="router">
+  <router-view></router-view>
+    </div>
+  
   </div>
 </template>
 <script>
 export default {
   data() {
-    return {};
+    return {
+      Iindex: 2
+    };
+  },
+  methods: {
+    goto(index) {
+      this.Iindex = index;
+      switch (index) {
+        case 1:
+          this.$router.push({
+            path: "/home"
+          });
+          break;
+        case 2:
+          this.$router.push({
+            path: "/olds"
+          });
+          break;
+        case 3:
+          this.$router.push({
+            path: "/collect"
+          });
+          break;
+        case 4:
+          this.$router.push({
+            path: "/activity"
+          });
+          break;
+        case 5:
+          this.$router.push({
+            path: "/about"
+          });
+          break;
+        default:
+          break;
+      }
+    },
+    getShare() {
+      console.log("1");
+    }
   }
 };
 </script>
-<style scoped>
 
+
+<style scoped>
+.router{
+  max-width: 1221px;
+  max-width: 800px;
+  margin-left: 17.76%; 
+}
+.acticon {
+  font-size: 24px;
+  font-weight: 800;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #8e1218;
+  border-bottom: #8e1218 3px solid;
+}
+.head_input {
+  position: relative;
+}
+.head_input > img {
+  position: absolute;
+  right: 20px;
+  top: 6px;
+  width: 29px;
+  height: 29px;
+}
+.share {
+  border: none;
+  width: 253px;
+  height: 39px;
+  background-color: #eeeeee;
+  border-radius: 20px;
+}
 .head {
-  width: 1920px;
+  width: 100%;
+  min-width: 1200px;
   height: 107px;
   background-color: #858b93;
   display: flex;
   align-items: center;
 }
-.head_1{
-font-family: FZLTTHFW--GB1-0;
-	font-size: 26px;
-	font-weight: 800;
-	font-stretch: normal;
-	letter-spacing: 0px;
-	color: #0f0f0f;
+.head_1 {
+  font-family: FZLTTHFW--GB1-0;
+  font-size: 26px;
+  font-weight: 800;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #0f0f0f;
   margin-left: 21.56%;
   margin-right: 19.79%;
 }
-.head_2{
+.head_2 {
   display: flex;
   align-items: center;
-	font-family: FZLTXHK--GBK1-0;
-	font-size: 24px;
-	font-weight: normal;
-	font-stretch: normal;
-	letter-spacing: 0px;
-	color: #282828;
+  font-family: FZLTXHK--GBK1-0;
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #282828;
 }
-.head_2 > p{
+.head_2 > p {
   margin-right: 34px;
 }
-
 </style>

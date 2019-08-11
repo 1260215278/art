@@ -44,9 +44,7 @@ export default {
       justify-content: space-between;
       align-items: center;
       margin: auto;
-      margin-top: 8px;
-      
-      
+      margin-top: 8px;     
 }
 input::-webkit-input-placeholder{
       text-align: center;

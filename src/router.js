@@ -14,8 +14,6 @@ export default new Router({
       name: "home",
       component: () => import('./views/Login')
     },
-
-
     {
       path: "/loyout",
       component: () =>
@@ -25,14 +23,33 @@ export default new Router({
           path: "/about",
           name: "about",
           component: () =>
-            import("./views/About")
+            import("./views/content/About")
         },
         {
           path: "/home",
           name: "homeS",
           component: () =>
-            import("./views/Home")
-        }
+            import("./views/content/Home")
+        },
+        {
+          path: "/activity",
+          name: "activity",
+          component: () =>
+            import("./views/content/activity")
+        },
+        {
+          path: "/collect",
+          name: "collect",
+          component: () =>
+            import("./views/content/collect")
+        },
+        {
+          path: "/olds",
+          name: "olds",
+          component: () =>
+            import("./views/content/olds")
+        },
+        // 这里将会有有下一个子类
       ]
     }
   ]
