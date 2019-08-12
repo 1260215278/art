@@ -31,7 +31,7 @@ export default {
             gotoHome(){
                   //进入首页
                   this.$router.push({
-                        path:"/about"
+                        path:"/home"
                   })
             }
       }
@@ -109,7 +109,7 @@ input::-webkit-input-placeholder{
 /* TODO */
 .centent{
       height: 352px;
-      margin-top: 365px;
+      margin-top: 20%;
       width: 100%;
       display: flex;
       justify-content: space-between;

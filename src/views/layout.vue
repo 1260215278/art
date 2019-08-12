@@ -1,5 +1,5 @@
 <template>
-  <div class="loyout">
+  <div :class="Iindex==5 ? 'loyout2' : 'loyout'" >
     <div class="head">
       <div class="head_1">
         <p>藝通寶</p>
@@ -9,16 +9,14 @@
         <p :class="Iindex==2?'acticon' : '' " @click="goto(2)">古瓷局</p>
         <p :class="Iindex==3?'acticon' : '' " @click="goto(3)">藏品</p>
         <p :class="Iindex==4?'acticon' : '' " @click="goto(4)">活动</p>
-        <p :class="Iindex==5?'acticon' : '' " @click="goto(5)">关于</p>
+        <p :class="Iindex==5?'acticon' : '' " @click="goto(5)">关于我们</p>
       </div>
       <div class="head_input">
         <input type="text" class="share" />
         <img @click="getShare" src="@/assets/icon.png" alt />
       </div>
     </div>
-    <div class="router">
   <router-view></router-view>
-    </div>
   
   </div>
 </template>
@@ -26,7 +24,7 @@
 export default {
   data() {
     return {
-      Iindex: 2
+      Iindex: 1
     };
   },
   methods: {
@@ -71,11 +69,18 @@ export default {
 
 
 <style scoped>
-.router{
-  max-width: 1221px;
-  max-width: 800px;
-  margin-left: 17.76%; 
+.loyout2{
+   
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
+.loyout{
+  background-color: #f4f4f4;
+  overflow: hidden;
+ 
+}
+
 .acticon {
   font-size: 24px;
   font-weight: 800;
