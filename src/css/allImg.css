@@ -1,0 +1,13 @@
+.allImg{
+
+    position: relative;
+}
+.all_img2{
+    position: absolute;
+    left: 50%;
+    bottom: -50px;
+    margin: auto;
+}
+.all_img2>img{
+    margin: auto;
+}

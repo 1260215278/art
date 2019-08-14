@@ -30,7 +30,7 @@
                 <span>口径:72mm   底径:75mm  高:210mm</span>
             </div>
           </div>
-          <div class="list_div">
+          <div class="list_div"> 
             <img class="model_img" src="@/assets/art_1 .png" alt="">
             <div class="mode-_detail">
                 <p>唐 - 邢窑白釉青花花卉纹花浇</p>
