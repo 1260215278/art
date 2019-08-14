@@ -65,6 +65,26 @@
       >凤造型扁壶，“凤首”做成壶嘴、“凤尾”翘起成壶把手；原生高岭土胎质，细腻坚硬，胎相呈灰白色，略有杂质，涩胎处釉窑红；制模泥条盘筑、合模成型；器型规整，修胎细致，壶嘴及把手采用捏塑造型，设计巧妙，造型生动传神；绘画所用青料属典型元代钴料，纹饰细致，颜色均匀，发色略显青灰，光下泛紫光；施青白釉，器身内部亦有施釉；底足露胎，略有釉斑；</p>
       <p class="apprec_p1">器物鉴赏：</p>
       <img class="apprec_img" src="@/assets/video.png" alt />
+      <div class="router">
+        <div>
+          <router-link class="link" to="/rest">基本信息</router-link>
+        </div>
+        <div>
+          <router-link class="link" to="/macroscopic">宏观描述</router-link>
+        </div>
+        <div>
+          <router-link class="link" to="/detail">微观描述</router-link>
+        </div>
+        <div>
+          <router-link class="link" to="/culture">文化历史</router-link>
+        </div>
+        <div>
+          <router-link class="link" to="/purpose">器物应用</router-link>
+        </div>
+        <div style="border:none;">
+          <router-link class="link" to="/auction">馆藏拍卖</router-link>
+        </div>
+      </div>
     </div>
     <router-view></router-view>
   </div>
@@ -76,9 +96,34 @@ export default {
 };
 </script>
 <style scoped>
-.apprec_img{
+.router {
+  display: flex;
+  margin-top: 43px;
+}
+.router > div {
+  flex: 1;
+  text-align: center;
+  border-right: 4px solid #292a2c;
+}
+.link {
+  text-decoration: none;  
+  font-family: FZLTZHK--GBK1-0;
+  font-size: 36px;
+  font-weight: 800;
+  font-stretch: normal;
+  line-height: 36px;
+  letter-spacing: 0px;
+  color: #292a2c;
+}
+
+.router-link-active {
+  text-decoration: none;
+ 
+  color: #8e1218;
+}
+.apprec_img {
   width: 1099px;
-	height: 621px;
+  height: 621px;
 }
 .apprec_p2 {
   font-family: FZLTXHK--GBK1-0;
@@ -88,7 +133,7 @@ export default {
   letter-spacing: 0px;
   color: #292a2c;
   text-indent: 2em;
-  margin-bottom: 94px;
+  margin-bottom: 84px;
 }
 .apprec_p1 {
   font-family: FZLTXHK--GBK1-0;

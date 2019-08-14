@@ -1,23 +1,32 @@
 <template>
-  <div :class="Iindex==5 ? 'loyout2' : 'loyout'" >
+  <div :class="Iindex==5 ? 'loyout2' : 'loyout'">
     <div class="head">
       <div class="head_1">
         <p>藝通寶</p>
       </div>
       <div class="head_2">
-        <p :class="Iindex==1?'acticon' : '' " @click="goto(1)">首页</p>
-        <p :class="Iindex==2?'acticon' : '' " @click="goto(2)">古瓷局</p>
-        <p :class="Iindex==3?'acticon' : '' " @click="goto(3)">藏品</p>
-        <p :class="Iindex==4?'acticon' : '' " @click="goto(4)">活动</p>
-        <p :class="Iindex==5?'acticon' : '' " @click="goto(5)">关于我们</p>
+        <p>
+          <router-link class="link" to="/home">首页</router-link>
+        </p>
+        <p>
+          <router-link class="link" to="/olds">古瓷局</router-link>
+        </p>
+        <p>
+          <router-link class="link" to="/collect">藏品</router-link>
+        </p>
+        <p>
+          <router-link class="link" to="/activity">活动</router-link>
+        </p>
+        <p>
+          <router-link class="link" to="/about">关于我们</router-link>
+        </p>
       </div>
       <div class="head_input">
         <input type="text" class="share" />
         <img @click="getShare" src="@/assets/icon.png" alt />
       </div>
     </div>
-  <router-view></router-view>
-  
+    <router-view></router-view>
   </div>
 </template>
 <script>
@@ -28,38 +37,6 @@ export default {
     };
   },
   methods: {
-    goto(index) {
-      this.Iindex = index;
-      switch (index) {
-        case 1:
-          this.$router.push({
-            path: "/home"
-          });
-          break;
-        case 2:
-          this.$router.push({
-            path: "/olds"
-          });
-          break;
-        case 3:
-          this.$router.push({
-            path: "/collect"
-          });
-          break;
-        case 4:
-          this.$router.push({
-            path: "/activity"
-          });
-          break;
-        case 5:
-          this.$router.push({
-            path: "/about"
-          });
-          break;
-        default:
-          break;
-      }
-    },
     getShare() {
       console.log("1");
     }
@@ -69,19 +46,26 @@ export default {
 
 
 <style scoped>
-.loyout2{
-   
+.loyout2 {
   overflow: hidden;
   height: 100%;
   width: 100%;
 }
-.loyout{
+.loyout {
   background-color: #f4f4f4;
   overflow: hidden;
- 
 }
-
-.acticon {
+.link {
+  font-family: FZLTXHK--GBK1-0;
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #282828;
+  text-decoration: none;
+}
+.router-link-active {
+  text-decoration: none;
   font-size: 24px;
   font-weight: 800;
   font-stretch: normal;
@@ -136,5 +120,6 @@ export default {
 }
 .head_2 > p {
   margin-right: 34px;
+  text-decoration: none;
 }
 </style>

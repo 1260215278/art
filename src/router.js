@@ -45,9 +45,47 @@ export default new Router({
         },
         {
           path: "/olds",
-          name: "olds",
+          // name: "olds",
           component: () =>
-            import("./views/content/olds")
+            import("./views/content/olds"),
+            children:[
+              {
+                path: "/auction",
+                name: "auction",
+                component: () =>
+                  import("./views/old/auction")
+              },
+              {
+                path: "/culture",
+                name: "culture",
+                component: () =>
+                  import("./views/old/culture")
+              },
+              {
+                path: "/detail",
+                name: "detail",
+                component: () =>
+                  import("./views/old/detail")
+              },
+              {
+                path: "/macroscopic",
+                name: "macroscopic",
+                component: () =>
+                  import("./views/old/macroscopic")
+              },
+              {
+                path: "/purpose",
+                name: "purpose",
+                component: () =>
+                  import("./views/old/purpose")
+              },
+              {
+                path: "/rest",
+                name: "rest",
+                component: () =>
+                  import("./views/old/rest")
+              },
+            ]
         },
         // 这里将会有有下一个子类
       ]

@@ -36,7 +36,7 @@ export default {
   margin: auto;
 }
 .imig1 {
-  width: 196px;
+  /* width: 196px; */
   height: 273px;
   margin: 197px 14% 0px 0%;
 }
