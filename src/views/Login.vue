@@ -31,7 +31,7 @@ export default {
             gotoHome(){
                   //进入首页
                   this.$router.push({
-                        path:"/home"
+                        path:"/loyout"
                   })
             }
       }

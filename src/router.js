@@ -16,6 +16,7 @@ export default new Router({
     },
     {
       path: "/loyout",
+      redirect:"/olds",
       component: () =>
         import("./views/layout"),
       children: [
@@ -46,6 +47,7 @@ export default new Router({
         {
           path: "/olds",
           // name: "olds",
+          redirect:"/olds/rest",
           component: () =>
             import("./views/content/olds"),
             children:[
