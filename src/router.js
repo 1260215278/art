@@ -50,37 +50,37 @@ export default new Router({
             import("./views/content/olds"),
             children:[
               {
-                path: "/auction",
+                path: "/olds/auction",
                 name: "auction",
                 component: () =>
                   import("./views/old/auction")
               },
               {
-                path: "/culture",
+                path: "/olds/culture",
                 name: "culture",
                 component: () =>
                   import("./views/old/culture")
               },
               {
-                path: "/detail",
+                path: "/olds/detail",
                 name: "detail",
                 component: () =>
                   import("./views/old/detail")
               },
               {
-                path: "/macroscopic",
+                path: "/olds/macroscopic",
                 name: "macroscopic",
                 component: () =>
                   import("./views/old/macroscopic")
               },
               {
-                path: "/purpose",
+                path: "/olds/purpose",
                 name: "purpose",
                 component: () =>
                   import("./views/old/purpose")
               },
               {
-                path: "/rest",
+                path: "/olds/rest",
                 name: "rest",
                 component: () =>
                   import("./views/old/rest")

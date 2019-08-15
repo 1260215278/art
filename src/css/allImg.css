@@ -1,12 +1,15 @@
 .allImg{
-
     position: relative;
+    margin: auto;
+    text-align: center;
 }
 .all_img2{
     position: absolute;
     left: 50%;
     bottom: -50px;
     margin: auto;
+    width: 216px;
+    margin-left: -108px;
 }
 .all_img2>img{
     margin: auto;

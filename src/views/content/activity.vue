@@ -103,6 +103,7 @@
               <span class="mode_span">邢窑 白釉嵌宝石辟邪</span>
             </div>
           </div>
+          
           <div class="list_div">
             <img class="model_img" src="@/assets/wan.png" alt />
             <div class="mode-_detail">
@@ -241,14 +242,16 @@ export default {
   font-weight: 200;
   letter-spacing: 0px;
   margin-top: 40px;
+  line-height: 36px;
   color: #292a2c;
   text-indent: 2em;
 }
 .sub_p4 {
   font-family: FZLTXHK--GBK1-0;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 200;
   letter-spacing: 0px;
+  line-height: 36px;
   color: #292a2c;
   text-indent: 2.5em;
 }
@@ -296,7 +299,7 @@ export default {
   width: 100%;
   background-color: #f4f4f4;
 
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 }
 .subject {
   max-width: 62.5%;
