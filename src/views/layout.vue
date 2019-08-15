@@ -1,5 +1,8 @@
 <template>
   <div :class="Iindex==5 ? 'loyout2' : 'loyout'">
+    <div class="allHed">
+
+    
     <div class="head">
       <div class="head_1">
         <p>藝通寶</p>
@@ -24,6 +27,7 @@
       <div class="head_input">
         <input type="text" class="share" />
         <img @click="getShare" src="@/assets/icon.png" alt />
+      </div>
       </div>
     </div>
     <router-view></router-view>
@@ -90,13 +94,22 @@ export default {
   background-color: #eeeeee;
   border-radius: 20px;
 }
-.head {
+.allHed{
   width: 100%;
-  min-width: 1200px;
   height: 107px;
   background-color: #858b93;
   display: flex;
   align-items: center;
+}
+.head {
+  width: 1150px;
+  height: 107px;
+  background-color: #858b93;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+   margin: auto;
+   
 }
 .head_1 {
   font-family: FZLTTHFW--GB1-0;
@@ -105,7 +118,6 @@ export default {
   font-stretch: normal;
   letter-spacing: 0px;
   color: #0f0f0f;
-  margin-left: 21.56%;
   margin-right: 19.79%;
 }
 .head_2 {
