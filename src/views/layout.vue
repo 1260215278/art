@@ -2,7 +2,6 @@
   <div :class="Iindex==5 ? 'loyout2' : 'loyout'">
     <div class="allHed">
 
-    
     <div class="head">
       <div class="head_1">
         <p>藝通寶</p>

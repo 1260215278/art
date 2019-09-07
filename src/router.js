@@ -7,7 +7,7 @@ Vue.use(Router);
 
 export default new Router({
   // mode: "history",
-  mode:"hash",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes: [
     {
@@ -17,7 +17,7 @@ export default new Router({
     },
     {
       path: "/loyout",
-      redirect:"/olds",
+      redirect: "/olds",
       component: () =>
         import("./views/layout"),
       children: [
@@ -41,54 +41,98 @@ export default new Router({
         },
         {
           path: "/collect",
-          name: "collect",
+          // name: "collect",
+          redirect: "/collect/age",
           component: () =>
-            import("./views/content/collect")
+            import("./views/content/collect"),
+          children: [{
+            path: "/collect/age",
+            name: "age",
+            component: () =>
+              import("./views/objects/age")
+          },
+          {
+            path: "/collect/apply",
+            name: "apply",
+            component: () =>
+              import("./views/objects/apply")
+          },
+          {
+            path: "/collect/color",
+            name: "color",
+            component: () =>
+              import("./views/objects/color")
+          },
+          {
+            path: "/collect/decorate",
+            name: "decorate",
+            component: () =>
+              import("./views/objects/decorate")
+          },
+          {
+            path: "/collect/kiln",
+            name: "kiln",
+            component: () =>
+              import("./views/objects/kiln")
+          },
+          {
+            path: "/collect/kind",
+            name: "kind",
+            component: () =>
+              import("./views/objects/kind")
+          },
+          {
+            path: "/collect/remom",
+            name: "remom",
+            component: () =>
+              import("./views/objects/remom")
+          },
+          ]
         },
         {
           path: "/olds",
           // name: "olds",
-          redirect:"/olds/rest",
+          redirect: "/olds/rest",
           component: () =>
             import("./views/content/olds"),
-            children:[
-              {
-                path: "/olds/auction",
-                name: "auction",
-                component: () =>
-                  import("./views/old/auction")
-              },
-              {
-                path: "/olds/culture",
-                name: "culture",
-                component: () =>
-                  import("./views/old/culture")
-              },
-              {
-                path: "/olds/detail",
-                name: "detail",
-                component: () =>
-                  import("./views/old/detail")
-              },
-              {
-                path: "/olds/macroscopic",
-                name: "macroscopic",
-                component: () =>
-                  import("./views/old/macroscopic")
-              },
-              {
-                path: "/olds/purpose",
-                name: "purpose",
-                component: () =>
-                  import("./views/old/purpose")
-              },
-              {
-                path: "/olds/rest",
-                name: "rest",
-                component: () =>
-                  import("./views/old/rest")
-              },
-            ]
+          children: [
+            {
+              path: "/olds/auction",
+              name: "auction",
+              component: () =>
+                import("./views/old/auction")
+            },
+            {
+              path: "/olds/culture",
+              name: "culture",
+              component: () =>
+                import("./views/old/culture")
+            },
+            {
+              path: "/olds/detail",
+              name: "detail",
+              component: () =>
+                import("./views/old/detail")
+            },
+            {
+              path: "/olds/macroscopic",
+              name: "macroscopic",
+              component: () =>
+                import("./views/old/macroscopic")
+            },
+            {
+              path: "/olds/purpose",
+              name: "purpose",
+              component: () =>
+                import("./views/old/purpose")
+            },
+            {
+              path: "/olds/rest",
+              name: "rest",
+              component: () =>
+                import("./views/old/rest")
+            },
+          ]
         },
         // 这里将会有有下一个子类
       ]

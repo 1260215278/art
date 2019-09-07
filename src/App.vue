@@ -35,3 +35,6 @@ input {
   color: #42b983;
 }
 </style>
+<style>
+  @import "./css/style.css";
+</style>
