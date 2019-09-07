@@ -98,7 +98,7 @@
 
 <script>
 // @ is an alias to /src
-
+import {gethomeProduct,getHomeAbout} from "../apis/login" 
 export default {
   name: "home",
   data() {
