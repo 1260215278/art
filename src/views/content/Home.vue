@@ -98,13 +98,28 @@
 
 <script>
 // @ is an alias to /src
+import {escape2Html ,removeHTMLTag } from '../utils/rictText'
 import {gethomeProduct,getHomeAbout} from "../apis/login" 
 export default {
   name: "home",
   data() {
-    return {};
+    return {
+      activeImg:'',
+      contentStr:''
+    };
   },
-  methods: {}
+  created(){
+    this.getHome()
+  },
+  methods: {
+    getHome(){
+      getHomeAbout().then(res=>{
+        // console.log(res)
+        // this.contentStr=escape2Html(res.)
+        // this.activeImg="http://www.yicangtianxia.com.cn/index/Uploads/201909051567694079.png"
+      })
+    }
+  }
 };
 </script>
 

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 const servie=axios.create({
-    baseURL:'http://www.yicangtianxia.com.cn',
+    baseURL:'http://www.yicangtianxia.com.cn/index',
     timeout :' 5000'
 })
 
