@@ -7,8 +7,7 @@
       </div>
       <div class="head_right">
         <img class="head_right_img1" src="@/assets/logo1.png" alt />
-        <p>“古瓷局”作为北京艺通宝科技有限公司旗下创立的古代瓷器艺术品品牌之一，以承载、讲述、展示中国古瓷文化为己任，具有保真、保值、保质(器物保真、司法鉴定、价格评估)的特性， 在古瓷艺术品市场上拥有良好的口碑和品牌形象。</p>
-        <p>“古瓷局”对所有藏品均以严谨的态度、通俗易懂的语言、融媒体方式呈现为特点，对古瓷艺术品进行解读、鉴赏、鉴定和赋能，还原古瓷文化的历史文脉，给大众提供一套完整完善的古瓷文化艺术鉴赏体系，满足大众对古瓷文化知识学习的需求。</p>
+          <div class="head_txt" v-html="contentStr"></div>
         <img class="head_right_img2" src="../../assets/nextIcon.png" alt />
       </div>
     </div>
@@ -110,12 +109,18 @@ export default {
   },
   created(){
     this.getHome()
+    this.getProduct()
   },
   methods: {
+    getProduct(){
+      gethomeProduct().then(res=>{
+        console.log(res)
+      })
+    },
     getHome(){
       getHomeAbout().then(res=>{
         // console.log(res)
-        // this.contentStr=escape2Html(res.)
+        this.contentStr=escape2Html(res.content)
         // this.activeImg="http://www.yicangtianxia.com.cn/index/Uploads/201909051567694079.png"
       })
     }
@@ -125,5 +130,18 @@ export default {
 
 <style lang="stylus" scoped>
 @import '../../css/collect.styl';
+  .head_txt{
+        clear: both;
+        font-family: MicrosoftYaHei;
+        width: 792px;
+        font-size: 20px;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px;
+        line-height: 35px;
+        color: #292a2c;
+        margin-top: 35px;
+        overflow: hidden;
+  }
  
 </style>

@@ -46,6 +46,16 @@ export function getShowProduct(data){
     })
 }
 
+//藏品产品
+
+export function getProduct(data){
+    return request({
+        url:'/product',
+        method:'post',
+        data
+    })
+}
+
 //藏品介绍
 export function getCangAbout(){
     return request({

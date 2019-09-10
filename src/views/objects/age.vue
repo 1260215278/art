@@ -207,8 +207,26 @@
     </div>
 </template>
 <script>
+
+import ImgUrl from '../utils/ImgUrl'
+import {escape2Html  } from '../utils/rictText'
+import {getProduct} from "../apis/login" 
+import { get } from 'http';
 export default {
-    
+  data(){
+    return{
+
+    }
+  }   ,
+  created(){
+      this.getContent()
+  },methods:{
+    getContent(){
+      getProduct({cid:1}).then(res=>{
+        console.log(res)
+      })
+    }
+  }
 }
 </script>>
 <style lang="stylus" scoped>

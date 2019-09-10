@@ -4,12 +4,11 @@
     <div class="head3">
       <div class="head">
         <div class="head_img">
-          <img src="@/assets/cang.png" alt />
+          <img :src="cangImg" alt />
           <!-- <h1>藏</h1> -->
         </div>
         <div class="head_right head_right2">
-          <p>藏品是艺通宝展示内容的重要组成部分，该部分藏品延续古瓷局的特征，均以严谨的态度、通俗易懂的语言、对所藏器物进行解读、鉴赏、鉴定和赋能，还原古瓷文化的历史文脉，给大众提供一套完整完善的古瓷文化艺术鉴赏体系，满足大众对古瓷文化知识学习的需求</p>
-          <p>藏品内容通过系统的整理、分类，把所有器物按时代、窑系、器型、釉彩、纹饰、应用几个方面进行归纳分类，便于广大古瓷艺术爱好者进行研究和学习。</p>
+          <p v-html="centent"></p>
         </div>
       </div>
     </div>
@@ -58,15 +57,29 @@
 
 <script>
 // @ is an alias to /src
-
+import ImgUrl from '../utils/ImgUrl'
+import {escape2Html  } from '../utils/rictText'
+import {getShowProduct,getCangAbout,getProduct} from "../apis/login" 
 export default {
   name: "collect",
   data() {
     return {
-      Index: 1
+      Index: 1,
+      centent:'',
+      cangImg:''
     };
   },
+  created(){
+    this.getAbout()
+  },
   methods: {
+    getAbout(){
+      getCangAbout().then(res=>{
+        console.log(res)
+        this.cangImg=ImgUrl+res.thumb
+        this.centent=escape2Html(res.content)
+      })
+    },
     getIndex(res) {
       this.Index = res;
     }

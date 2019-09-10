@@ -91,8 +91,23 @@
 </template>
 
 <script>
+import {getShowProduct } from '../apis/login'
 export default {
-  name: "olds"
+  name: "olds",
+  data(){
+      return{
+        
+      }
+  },
+  created(){
+    this.getAbout()
+  },methods:{
+      getAbout(){
+        getShowProduct({P_id:1}).then(res=>{
+          console.log(res)
+        })
+      }
+  }
 };
 </script>
 <style scoped>
