@@ -110,6 +110,8 @@ export default {
   created(){
     this.getHome()
     this.getProduct()
+    //
+    // console.log(this.$options.data())
   },
   methods: {
     getProduct(){

@@ -20,7 +20,7 @@
           autocomplete="off"
           style=" margin-top: 15px;"
         />
-        <button @click="gotoHome">登录</button>
+        <button @click="passlogin">登录</button>
         <div class="sign">
           <p @click="forgetPassword(1)">忘记密码</p>
           <p @click="signIn()">免费注册</p>
@@ -31,10 +31,10 @@
         <p>{{title}}</p>
         <input type="text" style="display:none" />
 
-        <input placeholder="手机/用户名" v-model="from.phone" autocomplete="off" />
+        <input placeholder="手机/用户名" v-model="NoteFrom.phone" autocomplete="off" />
         <div class="codeDiv" style="margin-top: 15px;">
-          <input placeholder="验证码" v-model="from.code" autocomplete="off" />
-          <p @click="getCode()">获取验证码</p>
+          <input placeholder="验证码" v-model="Notecode" maxlength="4" autocomplete="off" />
+          <p @click="getCode()">{{nextTime}}</p>
         </div>
         <input type="password" style="display:none" />
         <input
@@ -44,7 +44,7 @@
           autocomplete="off"
           style="margin-top: 15px;"
         />
-        <button @click="gotoHome" style="margin-top:25px;">{{buttonText}}</button>
+        <button @click="NotesignIn" style="margin-top:25px;">{{buttonText}}</button>
         <div class="sign">
           <p @click="signIn(2)">账号密码登录</p>
           <p @click="signIn()"></p>
@@ -56,13 +56,22 @@
 <script>
 import { login, getNote } from "./apis/login";
 import request from "../request";
+import { clearInterval, setInterval } from "timers";
 export default {
   data() {
     return {
-          title:"用户注册",
-          buttonText:"注册",
+      title: "用户注册",
+      buttonText: "注册",
 
       islogin: false,
+      NoteFrom: {
+        phone: ""
+      },
+      nextTime: "获取验证码",
+      myStieout: null,
+      isgetNode: true,
+      code:'',
+      Notecode:'',
       from: {
         phone: "",
         password: ""
@@ -70,11 +79,64 @@ export default {
     };
   },
   methods: {
+    passlogin(){
+      //账号密码登录
+      login(this.from).then(res=>{
+                console.log(res)
+                if (res.num == 1) {
+                  // TODO
+                  console.log('登录成功')
+                  this.gotoHome()
+                }
+              })
+    },
+    NotesignIn(){
+      //注册用户 这里会验证前端验证码 虽然有点奇怪
+      if (this.code ==this.Notecode ) {
+          if (this.from.password) {
+            this.from.phone=this.NoteFrom.phone
+              login(this.from).then(res=>{
+                console.log(res)
+                if (res.num == 1) {
+                  // TODO
+                  console.log('登录成功')
+                  this.gotoHome()
+                }
+              })
+          }
+      }else{
+
+      }
+    },
     getCode() {
       //获取验证码
-       getNote({phone:'18674608657'}).then(res=>{
-             console.log(res)
-       })
+      var _this=this
+      if (!/^1[3456789]\d{9}$/.test(_this.NoteFrom.phone)) {
+        alert("手机号码有误，请重填");
+        return false;
+      }
+      if (!_this.isgetNode) return;
+      getNote(_this.NoteFrom).then(res => {
+        console.log(res);
+        if (res.zt == 0) {
+          _this.code=res.code
+          //验证码发送成功
+          _this.isgetNode = false;
+          clearInterval(_this.myStieout);
+          let next = 60;
+          _this.myStieout = setInterval(() => {
+            next--;
+            _this.nextTime = "" + next + "秒后再获取";
+            if (next == 0) {
+              _this.nextTime = "获取验证码";
+              _this.isgetNode = true;
+              clearInterval(_this.myStieout);
+              return
+            }
+          }, 1000);
+        } else {
+        }
+      });
     },
     login() {
       //搭建项目
@@ -83,15 +145,15 @@ export default {
       //忘记密码
       this.islogin = !this.islogin;
       this.isfind = true;
-      this.title="找回密码"
-      this.buttonText="设置"
+      this.title = "找回密码";
+      this.buttonText = "设置";
     },
     signIn() {
       //注册
       this.islogin = !this.islogin;
       this.isfind = false;
-      this.title="注册用户"
-      this.buttonText="注册"
+      this.title = "注册用户";
+      this.buttonText = "注册";
     },
     gotoHome() {
       //进入首页
@@ -117,7 +179,7 @@ export default {
   font-stretch: normal;
   letter-spacing: 0px;
   color: #282828;
-   cursor:pointer;
+  cursor: pointer;
 }
 input[readonly] {
   background-color: #fff !important;
@@ -140,8 +202,8 @@ input[readonly] {
   margin: auto;
   margin-top: 8px;
 }
-.sign >p{
-       cursor:pointer;
+.sign > p {
+  cursor: pointer;
 }
 
 input::-webkit-input-placeholder {

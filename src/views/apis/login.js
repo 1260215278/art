@@ -3,7 +3,7 @@ import request from  '../../request'
 //获取短信验证码
 export function getNote(data){
     return request({
-        url:"/send",
+        url:"/send.html",
         method:'post',
         data
     })
