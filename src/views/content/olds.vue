@@ -4,46 +4,46 @@
     <div class="body">
       <img class="body_img" src="@/assets/logo2.png" alt />
       <div class="head_img">
-        <img src="@/assets/logo4.png" alt />
+        <img  :src="retImg(allFrom.thumb)" alt />
       </div>
       <div class="head_title">
         <div class="head_p1A">
-          <p class="p1A">元-青花折枝莲花凤纹凤首扁壶</p>
-          <p class="p2A">时期：元代</p>
-          <p class="p3A">口径：41mm 底部：44mm*86mm 高：200mm</p>
+          <p class="p1A">{{allFrom.title}}</p>
+          <p class="p2A">时期：{{allFrom.shiqi}}</p>
+          <p class="p3A">口径：{{allFrom.koujing}}mm 底部：{{allFrom.dijing}}mm*{{allFrom.kuandu}}mm 高：{{allFrom.gaodu}}mm</p>
         </div>
         <div class="head_p2A">
           <div class="head_p3A">
             <p class="p4A">器型：</p>
-            <p class="p5A">立器，花浇</p>
+            <p class="p5A">{{allFrom.qixings}}</p>
           </div>
           <div class="head_p3A">
             <p class="p4A">器型：</p>
-            <p class="p5A">立器，花浇</p>
+            <p class="p5A">{{allFrom.qixings}}</p>
           </div>
           <div class="head_p3A">
             <p class="p4A">胎：</p>
-            <p class="p5A">高岭土胎质</p>
+            <p class="p5A">{{allFrom.tai}}</p>
           </div>
           <div class="head_p3A">
             <p class="p4A">成型工艺：</p>
-            <p class="p5A">泥条盘筑、合模</p>
+            <p class="p5A">{{allFrom.cxgy}}</p>
           </div>
           <div class="head_p3A">
             <p class="p4A">造型工艺：</p>
-            <p class="p5A">捏塑</p>
+            <p class="p5A">{{allFrom.zzgy}}</p>
           </div>
           <div class="head_p3A">
             <p class="p4A">彩：</p>
-            <p class="p5A">釉下青花（高铁低锰钴料）</p>
+            <p class="p5A">{{allFrom.you}}</p>
           </div>
           <div class="head_p3A">
             <p class="p4A">烧造：</p>
-            <p class="p5A">高温一次烧造</p>
+            <p class="p5A">{{allFrom.shaozao}}</p>
           </div>
           <div class="head_p3A">
             <p class="p4AA">用途：</p>
-            <p class="p5A">赏器</p>
+            <p class="p5A">{{allFrom.yongtu}}</p>
           </div>
         </div>
         <div class="zhanshi">3D展示</div>
@@ -62,9 +62,9 @@
       <p class="apprec_p1A">器物描述：</p>
       <p
         class="apprec_p2A"
-      >凤造型扁壶，“凤首”做成壶嘴、“凤尾”翘起成壶把手；原生高岭土胎质，细腻坚硬，胎相呈灰白色，略有杂质，涩胎处釉窑红；制模泥条盘筑、合模成型；器型规整，修胎细致，壶嘴及把手采用捏塑造型，设计巧妙，造型生动传神；绘画所用青料属典型元代钴料，纹饰细致，颜色均匀，发色略显青灰，光下泛紫光；施青白釉，器身内部亦有施釉；底足露胎，略有釉斑；</p>
-      <p class="apprec_p1A">器物鉴赏：</p>
-      <img class="apprec_img" src="@/assets/video.png" alt />
+        v-html="retHTML(allFrom.desc)"
+      ><p class="apprec_p1A">器物鉴赏：</p>
+      <video class="apprec_img" :src="retImg(allFrom.video)" controls></video>
       <div class="router">
         <div>
           <router-link class="link" to="/olds/rest">基本信息</router-link>
@@ -91,20 +91,38 @@
 </template>
 
 <script>
+
+import  ImgUrl from "../utils/ImgUrl"
+import {escape2Html ,removeHTMLTag } from '../utils/rictText'
 import {getShowProduct } from '../apis/login'
 export default {
   name: "olds",
   data(){
       return{
-        
+        allFrom:{},
+        getFrom:{
+          p_id:""
+        }
       }
   },
   created(){
+    this.getFrom.p_id=this.$route.query.id || 1
+
     this.getAbout()
+
   },methods:{
+    retHTML(res){
+      if (!res)  return
+      return escape2Html(res)
+    },
+     retImg(res){
+        if (!res)  return
+      return ImgUrl+res
+    },
       getAbout(){
-        getShowProduct({P_id:1}).then(res=>{
-          console.log(res)
+        getShowProduct(this.getFrom).then(res=>{
+          console.log(res,"??")
+          this.allFrom=res
         })
       }
   }

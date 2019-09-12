@@ -54,7 +54,7 @@
   </div>
 </template>
 <script>
-import { login, getNote } from "./apis/login";
+import { login, getNote,zhuce } from "./apis/login";
 import request from "../request";
 import { clearInterval, setInterval } from "timers";
 export default {
@@ -63,7 +63,7 @@ export default {
       title: "用户注册",
       buttonText: "注册",
 
-      islogin: false,
+      islogin: true,
       NoteFrom: {
         phone: ""
       },
@@ -95,12 +95,14 @@ export default {
       if (this.code ==this.Notecode ) {
           if (this.from.password) {
             this.from.phone=this.NoteFrom.phone
-              login(this.from).then(res=>{
+              zhuce(this.from).then(res=>{
                 console.log(res)
                 if (res.num == 1) {
                   // TODO
                   console.log('登录成功')
                   this.gotoHome()
+                }else if (res.num == 0) {
+                  console.log("号码注册失败")
                 }
               })
           }

@@ -17,6 +17,14 @@ export function  login(data){
         data:data
     })
 }
+//会员注册
+export function zhuce(data){
+    return request({
+        url:"/zhuce.html",
+        method:"post",
+        data
+    })
+}
 
 //获取首页介绍
 export function  getHomeAbout(data){
@@ -40,7 +48,7 @@ export function gethomeProduct(){
 
 export function getShowProduct(data){
     return request({
-        url:'/showproduct',
+        url:'/showproduct.html',
         method:'post',
         data
     })
