@@ -68,7 +68,6 @@ export default {
     },
     getProduct(){
       gethomeProduct().then(res=>{
-        console.log(res)
         this.opints=res
       })
     },

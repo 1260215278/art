@@ -1,7 +1,10 @@
 <template>
-  <div class="macor">
+  <div class="macor" id="/olds/culture">
     <!-- 宏观 -->
-    <div class="title">
+     <div v-html="context" class="title">
+
+    </div>
+    <!-- <div class="title">
       <p class="p1">一、纹饰图案</p>
       <p class="p2 p4">凤</p>
       <p
@@ -74,13 +77,21 @@
       <p
         class="p2 p4"
       >凤冠及羽毛均为泥条捏塑，造型装饰虽简单，但十分传神，嘴部紧咬，嘴两侧做流，在倒水时，水流从两边流出，又汇聚成一柱，可见设计的巧妙；另此类器物均会有盖，只是因年代久远，盖多难以保存。</p>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 export default {
+  name:"culture",
   data() {
-    return {};
+    return {
+      context:""
+    };
+  },
+  methods:{
+    getContent(res){
+     this.context=res
+    }
   }
 };
 </script>

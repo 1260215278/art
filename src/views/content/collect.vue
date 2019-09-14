@@ -40,10 +40,10 @@
              <router-link class="link" to="/collect/remom">推荐 </router-link>
           </p>
         </div>
-        <div class="head_input">
+        <!-- <div class="head_input">
           <input type="text" class="share" />
           <img src="@/assets/icon.png" alt />
-        </div>
+        </div> -->
       </div>
 
       <!-- 展示List -->

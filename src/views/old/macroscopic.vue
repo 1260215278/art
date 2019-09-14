@@ -1,7 +1,10 @@
 <template>
-  <div class="macor">
+  <div class="macor" id="/olds/macroscopic">
     <!-- 宏观 -->
-    <div class="title">
+    <div v-html="context" class="title">
+
+    </div>
+    <!-- <div class="title">
       <p class="p1">一、器型</p>
       <p class="p2 p4">
         凤造型扁壶，“凤首”做成壶嘴、“凤尾”翘起成壶把手；壶嘴及把手采用捏塑造型，设计巧妙，造型生动传神。
@@ -33,7 +36,7 @@
       >发色是让瓷釉显现希望的颜色的处理过程，瓷釉最终的颜色是釉料在特定的环境中处理显现出来的，这中间有复杂的化学反应，发色过程需要使用不同的发色条件将釉料中的金属离子以不同价态氧化物或者盐的形式固定下来，使之显示绚烂的色彩。</p>
       <p class="p1">八、用途</p>
       <p class="p2 p4">贡品、酒具、使用器物、观赏器物"</p>
-      <!-- 图片 -->
+
       <div class=" title_img2">
         <div class="allImg">
           <img src="@/assets/artTxt.png" alt />
@@ -78,15 +81,21 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
 export default {
+  name:"macroscopic",
   data() {
     return {
-      isaaaaaaaaaaaaaaaaaaaa:{}
+      context:""
     };
+  },methods:{
+    getContent(res){
+      // console.log("我是子组件内容",res)
+      this.context=res
+    }
   }
 };
 </script>

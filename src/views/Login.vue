@@ -81,6 +81,10 @@ export default {
   methods: {
     passlogin(){
       //账号密码登录
+      if (!this.from.phone || !this.from.password) {
+        console.log("未输入账号密码")
+        return
+      }
       login(this.from).then(res=>{
                 console.log(res)
                 if (res.num == 1) {

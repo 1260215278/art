@@ -4,13 +4,15 @@
     <div class="body">
       <img class="body_img" src="@/assets/logo2.png" alt />
       <div class="head_img">
-        <img  :src="retImg(allFrom.thumb)" alt />
+        <img :src="retImg(allFrom.thumb)" alt />
       </div>
       <div class="head_title">
         <div class="head_p1A">
           <p class="p1A">{{allFrom.title}}</p>
           <p class="p2A">时期：{{allFrom.shiqi}}</p>
-          <p class="p3A">口径：{{allFrom.koujing}}mm 底部：{{allFrom.dijing}}mm*{{allFrom.kuandu}}mm 高：{{allFrom.gaodu}}mm</p>
+          <p
+            class="p3A"
+          >口径：{{allFrom.koujing}}mm 底部：{{allFrom.dijing}}mm*{{allFrom.kuandu}}mm 高：{{allFrom.gaodu}}mm</p>
         </div>
         <div class="head_p2A">
           <div class="head_p3A">
@@ -42,11 +44,13 @@
             <p class="p5A">{{allFrom.shaozao}}</p>
           </div>
           <div class="head_p3A">
-            <p class="p4AA">用途：</p>
+            <p class="p4A">用途：</p>
             <p class="p5A">{{allFrom.yongtu}}</p>
           </div>
         </div>
-        <div class="zhanshi">3D展示</div>
+        <div class="zhanshi">
+          <span  @click="gettoaall" >3D展示</span>
+        </div>
 
         <div class="body_img2">
           <img src="@/assets/art_2.png" alt />
@@ -60,10 +64,8 @@
     <!-- 中部 -->
     <div class="apprec">
       <p class="apprec_p1A">器物描述：</p>
-      <p
-        class="apprec_p2A"
-        v-html="retHTML(allFrom.desc)"
-      ><p class="apprec_p1A">器物鉴赏：</p>
+      <p class="apprec_p2A" v-html="retHTML(allFrom.desc)"></p>
+      <p class="apprec_p1A">器物鉴赏：</p>
       <video class="apprec_img" :src="retImg(allFrom.video)" controls></video>
       <div class="router">
         <div>
@@ -91,46 +93,74 @@
 </template>
 
 <script>
-
-import  ImgUrl from "../utils/ImgUrl"
-import {escape2Html ,removeHTMLTag } from '../utils/rictText'
-import {getShowProduct } from '../apis/login'
+import ImgUrl from "../utils/ImgUrl";
+import { escape2Html, removeHTMLTag } from "../utils/rictText";
+import { getShowProduct } from "../apis/login";
 export default {
   name: "olds",
-  data(){
-      return{
-        allFrom:{},
-        getFrom:{
-          p_id:""
-        }
+  data() {
+    return {
+      allFrom: {},
+      getFrom: {
+        p_id: ""
       }
+    };
   },
-  created(){
-    this.getFrom.p_id=this.$route.query.id || 1
-    this.getAbout()
-    console.log(this.$route)
-    console.log(this)
-  }
-  ,mounted(){
-          console.log(this.$children[1])
-          var aa=this.$children[0]
-          aa.getContent("89")
-  }
-  ,methods:{
-    retHTML(res){
-      if (!res)  return
-      return escape2Html(res)
-    },
-     retImg(res){
-        if (!res)  return
-      return ImgUrl+res
-    },
-      getAbout(){
-        getShowProduct(this.getFrom).then(res=>{
-          this.allFrom=res
-         
-        })
+  created() {
+    this.getFrom.p_id = this.$route.query.id || 1;
+    this.getAbout();
+  },
+  mounted() {
+    
+   
+  },
+  updated() {
+    let uid = this.$children[this.$children.length - 1].$el.id;
+    for (let i = 0; i < this.$children.length; i++) {
+      if (this.$children[i].$el.id == uid) {
       }
+    }
+    switch (uid) {
+      case this.$children[0].to:
+        this.$children[6].getContent(escape2Html(this.allFrom.content));
+        break;
+      case this.$children[1].to:
+        this.$children[6].getContent(escape2Html(this.allFrom.hgxx));
+        break;
+      case this.$children[2].to:
+        this.$children[6].getContent(escape2Html(this.allFrom.wgxx));
+        break;
+      case this.$children[3].to:
+        this.$children[6].getContent(escape2Html(this.allFrom.lswh));
+        break;
+      case this.$children[4].to:
+        this.$children[6].getContent(escape2Html(this.allFrom.qwyy));
+        break;
+      case this.$children[5].to:
+        this.$children[6].getContent(escape2Html(this.allFrom.addtime));
+        break;
+      default:
+        break;
+    }
+  },
+  methods: {
+    gettoaall() {
+      //跳转
+      window.location.href = this.allFrom.sandi;
+    },
+    retHTML(res) {
+      if (!res) return;
+      return escape2Html(res);
+    },
+    retImg(res) {
+      if (!res) return;
+      return ImgUrl + res;
+    },
+    getAbout() {
+      getShowProduct(this.getFrom).then(res => {
+        this.allFrom = res;
+      });
+    }
   }
 };
 </script>
@@ -145,7 +175,7 @@ export default {
   border-right: 4px solid #292a2c;
 }
 .link {
-  text-decoration: none;  
+  text-decoration: none;
   font-family: FZLTZHK--GBK1-0;
   font-size: 36px;
   font-weight: 800;
@@ -157,7 +187,7 @@ export default {
 
 .router-link-active {
   text-decoration: none;
- 
+
   color: #8e1218;
 }
 .apprec_img {
@@ -224,6 +254,11 @@ export default {
   text-align: center;
   right: 50px;
   bottom: -180px;
+}
+.zhanshi > a {
+  text-decoration: none;
+  out-line: none;
+  color: white;
 }
 .zhanshi {
   width: 105px;
