@@ -107,10 +107,16 @@ export default {
   },
   created(){
     this.getFrom.p_id=this.$route.query.id || 1
-
     this.getAbout()
-
-  },methods:{
+    console.log(this.$route)
+    console.log(this)
+  }
+  ,mounted(){
+          console.log(this.$children[1])
+          var aa=this.$children[0]
+          aa.getContent("89")
+  }
+  ,methods:{
     retHTML(res){
       if (!res)  return
       return escape2Html(res)
@@ -121,8 +127,8 @@ export default {
     },
       getAbout(){
         getShowProduct(this.getFrom).then(res=>{
-          console.log(res,"??")
           this.allFrom=res
+         
         })
       }
   }

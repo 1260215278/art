@@ -59,7 +59,6 @@ export default {
   },
   methods: {
     getto(res){
-      console.log(res.p_id)
       this.$router.push({path:"/olds",query:{
         id:res.p_id
       }})

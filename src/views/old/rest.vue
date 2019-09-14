@@ -80,7 +80,15 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      isaaaaa:false
+    }
+  },created(){
+
+  },methods:{
+    getContent(res){
+      console.log("我是子组件内容",res)
+    }
   }
 };
 </script>
