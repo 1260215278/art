@@ -50,7 +50,6 @@ export default {
 
 <style scoped>
 .loyout2 {
-  overflow: hidden;
   height: 100%;
   width: 100%;
 }
@@ -101,7 +100,7 @@ export default {
   align-items: center;
 }
 .head {
-  width: 1150px;
+  min-width: 1150px;
   height: 107px;
   background-color: #858b93;
   display: flex;
