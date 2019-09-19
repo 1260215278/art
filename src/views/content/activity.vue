@@ -54,40 +54,24 @@
       <div class="subject">
         <div class="sub_title">
           <p class="h1">活动介绍：</p>
-          <p class="sub_p1">古瓷局与中兴国安静赏轩古瓷展览拍卖活动</p>
-          <p class="sub_p1">古瓷局百年普洱品鉴活动</p>
-          <p class="sub_p1">古瓷局北京坊唐宋元明清器物展示活动</p>
-          <p class="sub_p1">古瓷局北京坊万杯盏展览活动</p>
-          <p class="sub_p1">古瓷局宋盏文化沙龙</p>
-          <p class="sub_p1 avtive">古玉文化的策划与文创产业的开发</p>
-          <p class="sub_p1">古瓷局关于器物鉴定拍卖的沙龙</p>
+
+          <p class="sub_p1" v-for="(item , index ) in allLiat"  :key="index" @click="setConten(item.aid,index)">{{item.title}}</p>
+        
           <p class="sub_p1">...</p>
         </div>
 
         <div class="sub_text">
-          <p class="sub_p1 sub1">古瓷局北京坊万杯盏展览活动</p>
+          <p class="sub_p1 sub1">{{from.title}}</p>
           <div class="allImg">
-            <img src="@/static/beizhongr.png" alt />
+            <img :src="retImg(from.thumb)" alt />
             <div class="all_img2">
               <img src="@/assets/logo2.png" alt />
               <p>古瓷局万杯盏中主展藏品</p>
             </div>
           </div>
 
-          <p class="sub_p2" style="margin-top:90px;">活动介绍</p>
-          <p
-            class="sub_p3"
-          >以杯为媒，探讨当代生活方式——由北京坊、麟角无界设计主办，候鸟市集、开物匠心、大良造协办的北京坊·万杯展于7月5日在北京坊盛大开幕。本次展览汇集设计、手作、艺术、展览、生活、轻零售为一体，万千杯盏惊艳亮相，百位自由设计师和手工艺艺术家匠心演绎，国宴杯、古瓷局、五大名窑等十大展区各具百态风格。</p>
-          <p
-            class="sub_p3"
-          >当天下午，展览开幕发布会在北京坊劝业场举行，北京广安商业管理有限责任公司执行副总经理孙博伟、总策展人吴旭、联合策展人Susan Xiao与林莺华，及代表参展设计师、手工艺艺术家等共同出席并为展览揭幕。活动现场，总策展人吴旭与设计师和手工艺艺术家代表分别就展览主旨和亮点看点进行了对话和解读。</p>
-          <p
-            class="sub_p3"
-          >吴旭提到，此次展览的主旨是以“杯子“为展示媒介，探讨当下的生活百态、生活方式和其中人的状态。“参差多态乃是幸福之本源，对于人类创造的各种杯子总数来说，一万这个数量仅仅算做沧海一粟，所以万杯展是一个开始，是对过去文明观察的开始，是对未来可能性探讨的开始，是不同人们相互认同的开始，是每一个人开启无穷想象的开始。”作为北京坊今年的展览重头戏之一，万杯展的气质也与北京坊不谋而合。北京广安商业管理有限责任公司执行副总经理孙博伟谈到，北京坊的初衷之一即是希望倡导一种当代的、同时也具有在地传统特色的城市生活方式，而万杯展这样兼具艺术、设计、商业与生活为一体的展览形式，正是北京坊文化生活的重要组成部分;此次展览的举办场地，北京坊劝业场，不仅拥有百年历史，也承载了最具特色的城市商业与市井文化，将共同为到访者带来一场连接设计与生活的多元体验。</p>
-          <p
-            class="sub_p3"
-          >一场拥有众多质量优质的展品和设计的展览，一场各种奇工巧思和传统文化碰撞的沉浸式空间互动体验，一场杯子控不容错过的颜值大赏，也将会是“史上最有趣的杯子展”。在北京坊这个集“传统”和“未来”于一体的街区，与万千杯子对话，与设计对话，与蕴含其中的古今中西对话，与观展者自己对话，品味夏日里由设计带来的一点清凉。展览共28个单元，分布在劝业场的一层和二层。形状各异的杯子作品来自不同的艺术家、品牌和手艺人，蕴含着不同的故事，承载着不同的理想，等待参观者的欣赏、互动、分享。</p>
-          <p class="sub_p2" style="margin-top:80px; margin-bottom:40px;">相关链接</p>
+          <p v-html="allhTML"></p>
+         <p class="sub_p2" style="margin-top:80px; margin-bottom:40px;">相关链接</p>
           <p class="sub_p4">万千杯盏惊艳亮相，百位设计师联盟匠心演绎——“万杯展”在北京坊劝业场开展</p>
           <p class="sub_p4">WAAP招募 | 万千杯盏，自有风情——ART POWER 100 CLUB带你去看万杯展</p>
           <p class="sub_p4">“最有趣”杯子展亮相北京坊，万千杯盏取一“瓢”有点难</p>
@@ -160,14 +144,42 @@
 </template>
 
 <script>
+import {getActivity}  from '../apis/login'
 import Pubimg from "@/components/Pubimg.vue";
+
+import ImgUrl from '../utils/ImgUrl'
+import {escape2Html  } from '../utils/rictText'
 export default {
   name: "activity",
   data() {
-    return {};
+    return {
+      from:{},
+      allLiat:[],
+      allhTML:""
+    };
   },
   components: {
     Pubimg
+  },
+  created(){
+    this.getContent()
+  },methods:{
+     retImg(res) {
+      if (!res) return;
+      return ImgUrl + res;
+    },
+    setConten(id, index){
+      this.allhTML= escape2Html(this.allLiat[index].content) 
+       this.from=this.allLiat[index]
+    },
+    getContent(){
+      getActivity().then(res=>{
+        console.log(res)
+        this.from=res[0]
+        this.allLiat=res
+        this.allhTML=escape2Html(res[0].content) 
+      })
+    }
   }
 };
 </script>

@@ -24,7 +24,7 @@
         </p>
       </div>
       <div class="head_input">
-        <input type="text" class="share" />
+        <input type="text" class="share" v-model="from.keys" />
         <img @click="getShare" src="@/assets/icon.png" alt />
       </div>
       </div>
@@ -33,15 +33,21 @@
   </div>
 </template>
 <script>
+import { getQuery } from  './apis/login'
 export default {
   data() {
     return {
-      Iindex: 1
+      Iindex: 1,
+      from:{
+        keys:""
+      }
     };
   },
   methods: {
     getShare() {
-      console.log("1");
+      getQuery(this.from).then(res=>{
+        console.log(res)
+      })
     }
   }
 };

@@ -80,3 +80,28 @@ export function getAbout(){
         method:'post'
     })
 }
+
+export function getActivity(){
+    return request({
+        url:"/activity",
+        method:"post"
+    })
+}
+
+//密码找回
+export function getZhaohui(){
+    return request({
+        url:"/zhaohui",
+        method:"post"
+    })
+}
+
+//获取关键字
+
+export function getQuery(data){
+    return request({
+        url:"/sousuo",
+        method:"post",
+        data
+    })
+}

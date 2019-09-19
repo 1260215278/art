@@ -54,7 +54,7 @@
   </div>
 </template>
 <script>
-import { login, getNote,zhuce } from "./apis/login";
+import { login, getNote, zhuce, getZhaohui } from "./apis/login";
 import request from "../request";
 import { clearInterval, setInterval } from "timers";
 export default {
@@ -70,8 +70,8 @@ export default {
       nextTime: "获取验证码",
       myStieout: null,
       isgetNode: true,
-      code:'',
-      Notecode:'',
+      code: "",
+      Notecode: "",
       from: {
         phone: "",
         password: ""
@@ -79,44 +79,58 @@ export default {
     };
   },
   methods: {
-    passlogin(){
+    passlogin() {
       //账号密码登录
       if (!this.from.phone || !this.from.password) {
-        console.log("未输入账号密码")
-        return
+        console.log("未输入账号密码");
+        return;
       }
-      login(this.from).then(res=>{
-                console.log(res)
-                if (res.num == 1) {
-                  // TODO
-                  console.log('登录成功')
-                  this.gotoHome()
-                }
-              })
+      login(this.from).then(res => {
+        console.log(res);
+        if (res.num == 1) {
+          // TODO
+          console.log("登录成功");
+          this.gotoHome();
+        }
+      });
     },
-    NotesignIn(){
+    NotesignIn() {
       //注册用户 这里会验证前端验证码 虽然有点奇怪
-      if (this.code ==this.Notecode ) {
-          if (this.from.password) {
-            this.from.phone=this.NoteFrom.phone
-              zhuce(this.from).then(res=>{
-                console.log(res)
-                if (res.num == 1) {
-                  // TODO
-                  console.log('登录成功')
-                  this.gotoHome()
-                }else if (res.num == 0) {
-                  console.log("号码注册失败")
-                }
-              })
-          }
-      }else{
+      //TODO 在这里区分是不是手机号码注册
+      if (this.code == this.Notecode) {
+        if (this.from.password) {
+          this.from.phone = this.NoteFrom.phone;
 
+          if (this.title == "找回密码") {
+            getZhaohui(this.from).then(res => {
+              console.log(res);
+              if (res.num == 1) {
+                // TODO
+                console.log("登录成功");
+                this.gotoHome();
+              } else if (res.num == 0) {
+                console.log("号码注册失败");
+              }
+            });
+          } else {
+            zhuce(this.from).then(res => {
+              console.log(res);
+              if (res.num == 1) {
+                // TODO
+                console.log("登录成功");
+                this.gotoHome();
+              } else if (res.num == 0) {
+                console.log("号码注册失败");
+              }
+            });
+          }
+        }
+      } else {
       }
     },
     getCode() {
       //获取验证码
-      var _this=this
+      var _this = this;
       if (!/^1[3456789]\d{9}$/.test(_this.NoteFrom.phone)) {
         alert("手机号码有误，请重填");
         return false;
@@ -125,7 +139,7 @@ export default {
       getNote(_this.NoteFrom).then(res => {
         console.log(res);
         if (res.zt == 0) {
-          _this.code=res.code
+          _this.code = res.code;
           //验证码发送成功
           _this.isgetNode = false;
           clearInterval(_this.myStieout);
@@ -137,7 +151,7 @@ export default {
               _this.nextTime = "获取验证码";
               _this.isgetNode = true;
               clearInterval(_this.myStieout);
-              return
+              return;
             }
           }, 1000);
         } else {
