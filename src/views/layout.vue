@@ -23,20 +23,39 @@
           <router-link class="link" to="/about">关于我们</router-link>
         </p>
       </div>
-      <div class="head_input">
+
+      <div class="head_input" >
         <input type="text" class="share" v-model="from.keys" />
-        <img @click="getShare" src="@/assets/icon.png" alt />
+          <el-popover
+            placement="bottom"
+            width="600"
+            trigger="click">
+            <el-table :data="gridData" @row-click="clickTable">
+              <el-table-column   label="头像" >
+                <template slot-scope="scope">
+                  <img class="tableImg" :src="retImg(scope)" alt="">
+                </template>
+              </el-table-column>
+              <el-table-column  property="title" label="名字"></el-table-column>
+              <!-- <el-table-column width="300" property="address" label="地址"></el-table-column> -->
+            </el-table>
+              <img @click="getShare" class="share_img" slot="reference" src="@/assets/icon.png" alt />
+        </el-popover>
       </div>
+
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :key="indeDate"></router-view>
   </div>
 </template>
 <script>
+import  ImgUrl from "./utils/ImgUrl"
 import { getQuery } from  './apis/login'
 export default {
   data() {
     return {
+      indeDate:1261815484,
+       gridData: [],
       Iindex: 1,
       from:{
         keys:""
@@ -44,9 +63,24 @@ export default {
     };
   },
   methods: {
+        getto(res){
+          this.indeDate=Date.parse(new Date());
+      this.$router.push({path:"/olds",query:{
+        id:res.p_id
+      }})
+    },
+    clickTable(row, column, event){
+      console.log(row)
+      this.getto(row)
+    },
+     retImg(res){
+       console.log(res,"??? ")
+      return ImgUrl+res.row.thumb
+    },
     getShare() {
       getQuery(this.from).then(res=>{
         console.log(res)
+        this.gridData=res
       })
     }
   }
@@ -55,6 +89,9 @@ export default {
 
 
 <style scoped>
+.tableImg{
+  height: 50px;
+}
 .loyout2 {
   height: 100%;
   width: 100%;
@@ -84,7 +121,7 @@ export default {
 .head_input {
   position: relative;
 }
-.head_input > img {
+.share_img {
   position: absolute;
   right: 20px;
   top: 6px;

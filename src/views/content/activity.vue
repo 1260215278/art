@@ -71,16 +71,16 @@
           </div>
 
           <p v-html="allhTML"></p>
-         <p class="sub_p2" style="margin-top:80px; margin-bottom:40px;">相关链接</p>
+         <!-- <p class="sub_p2" style="margin-top:80px; margin-bottom:40px;">相关链接</p>
           <p class="sub_p4">万千杯盏惊艳亮相，百位设计师联盟匠心演绎——“万杯展”在北京坊劝业场开展</p>
           <p class="sub_p4">WAAP招募 | 万千杯盏，自有风情——ART POWER 100 CLUB带你去看万杯展</p>
           <p class="sub_p4">“最有趣”杯子展亮相北京坊，万千杯盏取一“瓢”有点难</p>
 
-          <p class="sub_p2" style="margin-top:80px;">活动展示器物介绍</p>
+          <p class="sub_p2" style="margin-top:80px;">活动展示器物介绍</p> -->
         </div>
         <!-- 展示列表 -->
         <div class="model">
-          <div class="list_div">
+          <!-- <div class="list_div">
             <img class="model_img" src="@/assets/wan.png" alt />
             <div class="mode-_detail">
               <p class="mode_p">1</p>
@@ -129,12 +129,12 @@
               <p class="mode_p">3</p>
               <span class="mode_span">邢窑 白釉嵌宝石辟邪</span>
             </div>
-          </div>
-          <div class="list_div">
-            <img class="model_img" src="@/assets/wan.png" alt />
+          </div> -->
+          <div class="list_div" v-for="(item,index) in from.qiwulist" :key="index">
+            <img class="model_img" :src="retImg(item.thumb)" alt />
             <div class="mode-_detail">
-              <p class="mode_p">4</p>
-              <span class="mode_span">邢窑 白釉嵌宝石辟邪</span>
+              <p class="mode_p">{{item.qid}}</p>
+              <span class="mode_span">{{item.desc}}</span>
             </div>
           </div>
         </div>
@@ -225,6 +225,9 @@ export default {
   flex-wrap: wrap;
   margin: 100px 50px 0px 50px;
 }
+.list_div>img{
+  height: 220px;
+}
 .list_div {
   width: 254px;
   height: 338px;
@@ -282,6 +285,7 @@ export default {
 }
 
 .sub_p1 {
+  cursor: pointer;
   font-family: FZLTXHK--GBK1-0;
   font-size: 20px;
   font-weight: normal;

@@ -82,14 +82,28 @@ export default {
     passlogin() {
       //账号密码登录
       if (!this.from.phone || !this.from.password) {
-        console.log("未输入账号密码");
+        this.$message({
+          message: '请输入账号密码',
+          type: 'warning'
+        });
         return;
       }
+         if (!/^1[3456789]\d{9}$/.test(this.from.phone)) {
+       this.$message({
+          message: '手机号码错误，请重新填写',
+          type: 'warning'
+        });
+        return false;
+      }
+
       login(this.from).then(res => {
         console.log(res);
         if (res.num == 1) {
           // TODO
-          console.log("登录成功");
+            this.$message({
+          message: '登录成功',
+          type: 'success'
+        });
           this.gotoHome();
         }
       });
@@ -106,10 +120,16 @@ export default {
               console.log(res);
               if (res.num == 1) {
                 // TODO
-                console.log("登录成功");
+                    this.$message({
+          message: '登录成功',
+          type: 'success'
+        });
                 this.gotoHome();
               } else if (res.num == 0) {
-                console.log("号码注册失败");
+                this.$message({
+          message: '号码注册失败',
+          type: 'warning'
+        });
               }
             });
           } else {
@@ -117,10 +137,16 @@ export default {
               console.log(res);
               if (res.num == 1) {
                 // TODO
-                console.log("登录成功");
+                     this.$message({
+          message: '登录成功',
+          type: 'success'
+        });
                 this.gotoHome();
               } else if (res.num == 0) {
-                console.log("号码注册失败");
+                this.$message({
+          message: '号码注册失败',
+          type: 'warning'
+        });
               }
             });
           }
@@ -132,7 +158,10 @@ export default {
       //获取验证码
       var _this = this;
       if (!/^1[3456789]\d{9}$/.test(_this.NoteFrom.phone)) {
-        alert("手机号码有误，请重填");
+       this.$message({
+          message: '手机号码错误，请重新填写',
+          type: 'warning'
+        });
         return false;
       }
       if (!_this.isgetNode) return;

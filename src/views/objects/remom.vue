@@ -15,7 +15,7 @@
               <img src="" alt="">
               </span>
           <div class="model">
-            <div class="list_div" v-for="(ite ,inde) in item.list " :key="inde">
+            <div class="list_div" v-for="(ite ,inde) in item.list " :key="inde" @click="getto(ite)">
               <img class="model_img" :src="retImg(ite.thumb)" alt />
               <div class="mode-_detail">
                 <p>{{ite.title}}</p>
@@ -43,7 +43,7 @@
       </span>
       <div class="model2">
 
-        <div class="list_div2" v-for="(ite ,inde) in item.list " :key="inde">
+        <div class="list_div2" v-for="(ite ,inde) in item.list " :key="inde" @click="getto(ite)"> 
           <img class="div2_img" :src="retImg(ite.thumb)" alt />
           <p class="div2_p1">{{ite.niandai}}</p>
           <p class="div2_p2">{{ite.title}}</p>
@@ -70,6 +70,11 @@ export default {
   created(){
       this.getContent()
   },methods:{
+      getto(res){
+      this.$router.push({path:"/olds",query:{
+        id:res.p_id
+      }})
+    },
      retImg(res) {
       if (!res) return;
       return ImgUrl + res;

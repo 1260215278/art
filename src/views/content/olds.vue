@@ -4,15 +4,23 @@
     <div class="body">
       <img class="body_img" src="@/assets/logo2.png" alt />
       <div class="head_img">
-        <img :src="retImg(allFrom.thumb)" alt />
+        <!-- <img :src="retImg(allFrom.thumb)" alt /> -->
+
+         <el-image 
+              style="width: 570px;   cursor: pointer;"
+             :src="retImg(allFrom.thumb)"
+              :preview-src-list="imgList">
+            </el-image>
+
       </div>
       <div class="head_title">
         <div class="head_p1A">
           <p class="p1A">{{allFrom.title}}</p>
           <p class="p2A">时期：{{allFrom.shiqi}}</p>
+          <!-- *{{allFrom.kuandu}}mm -->
           <p
             class="p3A"
-          >口径：{{allFrom.koujing}}mm 底部：{{allFrom.dijing}}mm*{{allFrom.kuandu}}mm 高：{{allFrom.gaodu}}mm</p>
+          >口径：{{allFrom.koujing}}mm 底径：{{allFrom.dijing}}mm 高：{{allFrom.gaodu}}mm</p>
         </div>
         <div class="head_p2A">
           <div class="head_p3A">
@@ -20,8 +28,8 @@
             <p class="p5A">{{allFrom.qixings}}</p>
           </div>
           <div class="head_p3A">
-            <p class="p4A">器型：</p>
-            <p class="p5A">{{allFrom.qixings}}</p>
+            <p class="p4A">重量：</p>
+            <p class="p5A">{{allFrom.zhongliang}}</p>
           </div>
           <div class="head_p3A">
             <p class="p4A">胎：</p>
@@ -52,8 +60,14 @@
           <span  @click="gettoaall" >3D展示</span>
         </div>
 
-        <div class="body_img2">
-          <img src="@/assets/art_2.png" alt />
+        <div class="body_img2" >
+          <!-- <img  :src="retImgS(allFrom.images)" alt /> -->
+            <el-image 
+               @click="seeImgS()"
+              style="width: 189px; height: 229px;margin-top:10px;  cursor: pointer;"
+              :src="retImgS(allFrom.images)"
+              :preview-src-list="srcList">
+            </el-image>
           <div class="body_img3">
             <p>器物图集</p>
           </div>
@@ -61,6 +75,7 @@
       </div>
     </div>
 
+  
     <!-- 中部 -->
     <div class="apprec">
       <p class="apprec_p1A">器物描述：</p>
@@ -93,6 +108,7 @@
 </template>
 
 <script>
+import  myImg from '@/assets/art_2.png'
 import ImgUrl from "../utils/ImgUrl";
 import { escape2Html, removeHTMLTag } from "../utils/rictText";
 import { getShowProduct } from "../apis/login";
@@ -100,9 +116,14 @@ export default {
   name: "olds",
   data() {
     return {
+      imgList:[],
+      srcList:[
+
+      ],
       allFrom: {},
       getFrom: {
-        p_id: ""
+        p_id: "",
+        images:[]
       }
     };
   },
@@ -122,28 +143,36 @@ export default {
     }
     switch (uid) {
       case this.$children[0].to:
-        this.$children[6].getContent(escape2Html(this.allFrom.content));
+        this.$children[8].getContent(escape2Html(this.allFrom.content));
         break;
       case this.$children[1].to:
-        this.$children[6].getContent(escape2Html(this.allFrom.hgxx));
+        this.$children[8].getContent(escape2Html(this.allFrom.hgxx));
         break;
       case this.$children[2].to:
-        this.$children[6].getContent(escape2Html(this.allFrom.wgxx));
+        this.$children[8].getContent(escape2Html(this.allFrom.wgxx));
         break;
       case this.$children[3].to:
-        this.$children[6].getContent(escape2Html(this.allFrom.lswh));
+        this.$children[8].getContent(escape2Html(this.allFrom.lswh));
         break;
       case this.$children[4].to:
-        this.$children[6].getContent(escape2Html(this.allFrom.qwyy));
+        this.$children[8].getContent(escape2Html(this.allFrom.qwyy));
         break;
       case this.$children[5].to:
-        this.$children[6].getContent(escape2Html(this.allFrom.addtime));
+        this.$children[8].getContent(escape2Html(this.allFrom.addtime));
         break;
       default:
         break;
     }
   },
   methods: {
+    seeImgS(){
+      if (this.srcList.length == 0) {
+           this.$message({
+          message: '没有多余的图片，此图片为默认图片',
+          type: 'warning'
+        });
+      }
+    },
     gettoaall() {
       //跳转
       window.location.href = this.allFrom.sandi;
@@ -152,13 +181,24 @@ export default {
       if (!res) return;
       return escape2Html(res);
     },
+    retImgS(res){
+        if (!res) return myImg;
+         return ImgUrl + res[0];
+    },
     retImg(res) {
-      if (!res) return;
+
+      if (!res) return  ;
       return ImgUrl + res;
     },
     getAbout() {
       getShowProduct(this.getFrom).then(res => {
         this.allFrom = res;
+        console.log(res)
+        this.imgList.push(ImgUrl+res.thumb)
+        if (!res.images) return ;
+        for (let index = 0; index < res.images.length; index++) {
+              this.srcList.push( ImgUrl+res.images[index])
+        }
       });
     }
   }
@@ -242,6 +282,7 @@ export default {
 }
 .body_img2 > img {
   margin-top: 15px;
+  cursor: pointer;
 }
 .body_img2 {
   z-index: 0;
@@ -261,6 +302,7 @@ export default {
   color: white;
 }
 .zhanshi {
+  cursor:pointer;
   width: 105px;
   height: 40px;
   background-color: #8e1218;
@@ -278,7 +320,7 @@ export default {
   align-items: center;
 }
 .head_p2A {
-  margin-top: 34px;
+  margin-bottom: 50px;
 }
 .olds {
   overflow: hidden;
@@ -286,9 +328,16 @@ export default {
   min-width: 1200px;
   margin: auto;
 }
+.head_img >img{
+    width: 570px;
+    height: auto;
+}
 .head_img {
   width: 570px;
-  margin-right: 30px;
+  margin-right: 120px;
+  display: flex;
+  align-items: center;
+
 }
 .body {
   display: flex;
