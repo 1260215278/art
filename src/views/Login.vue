@@ -83,15 +83,15 @@ export default {
       //账号密码登录
       if (!this.from.phone || !this.from.password) {
         this.$message({
-          message: '请输入账号密码',
-          type: 'warning'
+          message: "请输入账号密码",
+          type: "warning"
         });
         return;
       }
-         if (!/^1[3456789]\d{9}$/.test(this.from.phone)) {
-       this.$message({
-          message: '手机号码错误，请重新填写',
-          type: 'warning'
+      if (!/^1[3456789]\d{9}$/.test(this.from.phone)) {
+        this.$message({
+          message: "手机号码错误，请重新填写",
+          type: "warning"
         });
         return false;
       }
@@ -100,11 +100,16 @@ export default {
         console.log(res);
         if (res.num == 1) {
           // TODO
-            this.$message({
-          message: '登录成功',
-          type: 'success'
-        });
+          this.$message({
+            message: "登录成功",
+            type: "success"
+          });
           this.gotoHome();
+        }else{
+              this.$message({
+            message: "登录失败",
+            type: "warning"
+          });
         }
       });
     },
@@ -120,16 +125,16 @@ export default {
               console.log(res);
               if (res.num == 1) {
                 // TODO
-                    this.$message({
-          message: '登录成功',
-          type: 'success'
-        });
+                this.$message({
+                  message: "登录成功",
+                  type: "success"
+                });
                 this.gotoHome();
               } else if (res.num == 0) {
                 this.$message({
-          message: '号码注册失败',
-          type: 'warning'
-        });
+                  message: "号码注册失败",
+                  type: "warning"
+                });
               }
             });
           } else {
@@ -137,16 +142,16 @@ export default {
               console.log(res);
               if (res.num == 1) {
                 // TODO
-                     this.$message({
-          message: '登录成功',
-          type: 'success'
-        });
+                this.$message({
+                  message: "登录成功",
+                  type: "success"
+                });
                 this.gotoHome();
               } else if (res.num == 0) {
                 this.$message({
-          message: '号码注册失败',
-          type: 'warning'
-        });
+                  message: "号码注册失败",
+                  type: "warning"
+                });
               }
             });
           }
@@ -158,9 +163,9 @@ export default {
       //获取验证码
       var _this = this;
       if (!/^1[3456789]\d{9}$/.test(_this.NoteFrom.phone)) {
-       this.$message({
-          message: '手机号码错误，请重新填写',
-          type: 'warning'
+        this.$message({
+          message: "手机号码错误，请重新填写",
+          type: "warning"
         });
         return false;
       }
