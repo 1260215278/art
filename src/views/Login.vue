@@ -132,7 +132,7 @@ export default {
                 this.gotoHome();
               } else if (res.num == 0) {
                 this.$message({
-                  message: "号码注册失败",
+                  message: "找回密码失败",
                   type: "warning"
                 });
               }

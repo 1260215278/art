@@ -4,7 +4,7 @@ import qs from "qs"
 const servie=axios.create({
     baseURL:'http://admin.yicangtianxia.com.cn/index',
     timeout :'5000',
-    headers: {'content-type': 'application/x-www-form-urlencoded',"Access-Control-Allow-Origin" : "*"}
+    // headers: {'content-type': 'application/x-www-form-urlencoded'}
   
 })
 
