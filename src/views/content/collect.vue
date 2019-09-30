@@ -75,7 +75,6 @@ export default {
   methods: {
     getAbout(){
       getCangAbout().then(res=>{
-        console.log(res)
         this.cangImg=ImgUrl+res.thumb
         this.centent=escape2Html(res.content)
       })

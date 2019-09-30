@@ -85,7 +85,6 @@ export default {
     getContent(){
       getProduct({cid:1}).then(res=>{
         this.allFrom=res
-        console.log(res)
       })
     }
   }

@@ -193,8 +193,6 @@ export default {
     getAbout() {
       getShowProduct(this.getFrom).then(res => {
         this.allFrom = res;
-        console.log(res)
-        this.imgList.push(ImgUrl+res.thumb)
         if (!res.images) return ;
         for (let index = 0; index < res.images.length; index++) {
               this.srcList.push( ImgUrl+res.images[index])

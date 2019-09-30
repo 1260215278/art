@@ -57,7 +57,6 @@ export function getShowProduct(data){
 //藏品产品
 
 export function getProduct(data){
-    console.log(data)
     return request({
         url:'/product',
         method:'post',

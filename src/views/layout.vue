@@ -70,16 +70,13 @@ export default {
       }})
     },
     clickTable(row, column, event){
-      console.log(row)
       this.getto(row)
     },
      retImg(res){
-       console.log(res,"??? ")
       return ImgUrl+res.row.thumb
     },
     getShare() {
       getQuery(this.from).then(res=>{
-        console.log(res)
         this.gridData=res
       })
     }

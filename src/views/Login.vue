@@ -97,7 +97,6 @@ export default {
       }
 
       login(this.from).then(res => {
-        console.log(res);
         if (res.num == 1) {
           // TODO
           this.$message({
@@ -118,11 +117,11 @@ export default {
       //TODO 在这里区分是不是手机号码注册
       if (this.code == this.Notecode) {
         if (this.from.password) {
+          
           this.from.phone = this.NoteFrom.phone;
-
           if (this.title == "找回密码") {
+
             getZhaohui(this.from).then(res => {
-              console.log(res);
               if (res.num == 1) {
                 // TODO
                 this.$message({
@@ -139,7 +138,6 @@ export default {
             });
           } else {
             zhuce(this.from).then(res => {
-              console.log(res);
               if (res.num == 1) {
                 // TODO
                 this.$message({
@@ -171,7 +169,6 @@ export default {
       }
       if (!_this.isgetNode) return;
       getNote(_this.NoteFrom).then(res => {
-        console.log(res);
         if (res.zt == 0) {
           _this.code = res.code;
           //验证码发送成功

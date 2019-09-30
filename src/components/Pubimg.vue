@@ -16,7 +16,6 @@ export default {
   },
   computed:{
     imgUrl(){
-      console.log(this.Url)
       // return require(this.Url)
     }
   },

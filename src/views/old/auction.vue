@@ -90,7 +90,6 @@ export default {
   },
   methods:{
     getContent(res){
-      console.log(res)
       this.context=res
 }
   }

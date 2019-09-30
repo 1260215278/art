@@ -1,3 +1,3 @@
-const UrlImg='http://www.yicangtianxia.com.cn/Uploads/'
+const UrlImg='http://admin.yicangtianxia.com.cn/Uploads/'
 
 export default UrlImg

@@ -174,7 +174,6 @@ export default {
     },
     getContent(){
       getActivity().then(res=>{
-        console.log(res)
         this.from=res[0]
         this.allLiat=res
         this.allhTML=escape2Html(res[0].content) 
