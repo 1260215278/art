@@ -80,8 +80,8 @@
     <div class="apprec">
       <p class="apprec_p1A">器物描述：</p>
       <p class="apprec_p2A" v-html="retHTML(allFrom.desc)"></p>
-      <p class="apprec_p1A">器物鉴赏：</p>
-      <video class="apprec_img" :src="retImg(allFrom.video)" controls></video>
+      <p class="apprec_p1A" v-if="allFrom.video" >器物鉴赏：</p>
+      <video class="apprec_img" v-if="allFrom.video" :src="retImg(allFrom.video)" controls></video>
       <div class="router">
         <div>
           <router-link class="link" to="/olds/rest">基本信息</router-link>
@@ -137,28 +137,46 @@ export default {
   },
   updated() {
     let uid = this.$children[this.$children.length - 1].$el.id;
+    console.log(this.$children)
     for (let i = 0; i < this.$children.length; i++) {
+      console.log(this.$children[i].to)
       if (this.$children[i].$el.id == uid) {
       }
     }
+    console.log(uid)
     switch (uid) {
       case this.$children[0].to:
+        console.log(this.allFrom.content)
+        console.log("细节")
         this.$children[8].getContent(escape2Html(this.allFrom.content));
         break;
       case this.$children[1].to:
+        console.log("宏观描述")
         this.$children[8].getContent(escape2Html(this.allFrom.hgxx));
         break;
       case this.$children[2].to:
-        this.$children[8].getContent(escape2Html(this.allFrom.wgxx));
+        console.log("微观描述")
+        this.$children[8].getContent(escape2Html(this.allFrom.content));
         break;
       case this.$children[3].to:
-        this.$children[8].getContent(escape2Html(this.allFrom.lswh));
+        console.log("文化历史")
+        this.$children[8].getContent(escape2Html(this.allFrom.hgxx));
         break;
       case this.$children[4].to:
-        this.$children[8].getContent(escape2Html(this.allFrom.qwyy));
+        console.log("器物也")
+        this.$children[8].getContent(escape2Html(this.allFrom.wgxx));
         break;
       case this.$children[5].to:
-        this.$children[8].getContent(escape2Html(this.allFrom.addtime));
+        console.log("馆藏拍爱")
+        this.$children[8].getContent(escape2Html(this.allFrom.lswh));
+        break;
+        case this.$children[6].to:
+        console.log("buzhid")
+        this.$children[8].getContent(escape2Html(this.allFrom.qwyy));
+        break;
+         case this.$children[7].to:
+        console.log("我是7")
+        this.$children[8].getContent(escape2Html(this.allFrom.pmgc));
         break;
       default:
         break;
@@ -193,6 +211,8 @@ export default {
     getAbout() {
       getShowProduct(this.getFrom).then(res => {
         this.allFrom = res;
+        // console.log(this.allFrom.content)
+
         if (!res.images) return ;
         for (let index = 0; index < res.images.length; index++) {
               this.srcList.push( ImgUrl+res.images[index])
@@ -206,6 +226,7 @@ export default {
 .router {
   display: flex;
   margin-top: 43px;
+  margin-bottom: 40px
 }
 .router > div {
   flex: 1;
@@ -254,11 +275,11 @@ export default {
 }
 .apprec {
   width: 100%;
-  height: 1144px;
   background-color: #ffffff;
   margin-top: 93px;
   padding: 45px 50px 0px 50px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .body_img3 > p {
   font-family: FZLTXHK--GBK1-0;
