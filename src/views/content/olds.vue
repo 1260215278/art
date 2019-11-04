@@ -75,6 +75,7 @@
       </div>
     </div>
 
+   <div id="qrcode"></div>
   
     <!-- 中部 -->
     <div class="apprec">
@@ -106,16 +107,18 @@
     <router-view></router-view>
   </div>
 </template>
-
 <script>
 import  myImg from '@/assets/art_2.png'
 import ImgUrl from "../utils/ImgUrl";
 import { escape2Html, removeHTMLTag } from "../utils/rictText";
 import { getShowProduct } from "../apis/login";
+import { log } from 'util';
+import QRCode from 'qrcodejs2'
 export default {
   name: "olds",
   data() {
     return {
+      dialogVisible:true,
       imgList:[],
       srcList:[
 
@@ -132,7 +135,8 @@ export default {
     this.getAbout();
   },
   mounted() {
-    
+    this.qrcode()
+
    
   },
   updated() {
@@ -143,7 +147,6 @@ export default {
       if (this.$children[i].$el.id == uid) {
       }
     }
-    console.log(uid)
     switch (uid) {
       case this.$children[0].to:
         console.log(this.allFrom.content)
@@ -183,6 +186,29 @@ export default {
     }
   },
   methods: {
+       // 二维码生成  参数参考官方文档
+      qrcode() {
+        console.log("?")
+      let qrcode = new QRCode('qrcode', {
+        width: 132,  
+        height: 132,
+        text: 'https://www.baidu.com', // 二维码地址
+        colorDark : "#000",
+        colorLight : "#fff",
+      })
+
+    console.log(qrcode)
+    },
+        // 创建二维码对象
+        qr() {
+            let img = new Image();
+            img.src = this.my_qrcode._oDrawing._elCanvas.toDataURL();  // 获取64图  测的安卓、ios都可以
+            return img;
+        },
+    
+    handleClose(res){
+      console,log(res)
+    },
     seeImgS(){
       if (this.srcList.length == 0) {
            this.$message({
