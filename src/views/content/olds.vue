@@ -75,7 +75,26 @@
       </div>
     </div>
 
+<!--     
+<el-dialog
+  title="提示"
+  :visible.sync="dialogVisible"
+  width="30%"
+  :before-close="handleClose">
+
+
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+  </span>
+</el-dialog> -->
+
+  <div  :class="dialogVisible ? 'dialong isDialong' : ' dialong  ' " >
    <div id="qrcode"></div>
+
+  </div>
+
+
   
     <!-- 中部 -->
     <div class="apprec">
@@ -118,7 +137,8 @@ export default {
   name: "olds",
   data() {
     return {
-      dialogVisible:true,
+      dialogVisible:false,
+      
       imgList:[],
       srcList:[
 
@@ -135,14 +155,13 @@ export default {
     this.getAbout();
   },
   mounted() {
-    this.qrcode()
+    // this.qrcode()
 
    
   },
   updated() {
     let uid = this.$children[this.$children.length - 1].$el.id;
-    console.log(this.$children)
-    for (let i = 0; i < this.$children.length; i++) {
+      for (let i = 0; i < this.$children.length; i++) {
       console.log(this.$children[i].to)
       if (this.$children[i].$el.id == uid) {
       }
@@ -197,7 +216,8 @@ export default {
         colorLight : "#fff",
       })
 
-    console.log(qrcode)
+    console.log(qrcode._el.innerHTML)
+    console.log(qrcode._el.lastChild.currentSrc)
     },
         // 创建二维码对象
         qr() {
@@ -209,6 +229,9 @@ export default {
     handleClose(res){
       console,log(res)
     },
+    handleClose(){
+
+    },
     seeImgS(){
       if (this.srcList.length == 0) {
            this.$message({
@@ -218,6 +241,11 @@ export default {
       }
     },
     gettoaall() {
+
+      this.dialogVisible=true
+      this.qrcode()
+
+      return
       //跳转
       window.location.href = this.allFrom.sandi;
     },
@@ -249,6 +277,15 @@ export default {
 };
 </script>
 <style scoped>
+.dialong{
+  position: absolute;
+  z-index: -999;
+  top: 500px;
+  left: 500px;
+}
+.isDialong{
+  z-index: 999
+}
 .router {
   display: flex;
   margin-top: 43px;
